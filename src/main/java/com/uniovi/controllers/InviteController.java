@@ -63,7 +63,7 @@ public class InviteController {
 		return "redirect:/invite/send";
 	}
 	@RequestMapping(value="/invite/send",method=RequestMethod.GET)
-	public String sendInvite(Model model,Pageable pageable) {
+	public String sendInvite(Model model) {
 		model.addAttribute("userList", this.usersService.findAll());
 		return "/invite/send";
 	}

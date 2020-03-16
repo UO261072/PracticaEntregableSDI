@@ -358,5 +358,69 @@ public class NotaneitorTests {
 		elementos.get(0).click();
 		SeleniumUtils.textoPresentePagina(driver, "HTTP Status");
 	}
+	
+	//Ir al formulario crear publicaciones, rellenarla con datos válidos y pulsar el botón Submit. Comprobar que la publicación sale en el listado de publicaciones de dicho usuario.
+	@Test
+	public void PR24() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver,"koyomi@nishioishin.jp", "123456");
+		PO_View.checkElement(driver, "text", "Lista de Usuarios");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id,'post-menu')]/a");
+		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'post/add')]");
+		elementos.get(0).click();
+		WebElement title=driver.findElement(By.name("title"));
+		title.click();
+		title.clear();
+		title.sendKeys("Titulo");
+		WebElement text=driver.findElement(By.name("text"));
+		text.click();
+		text.clear();
+		text.sendKeys("Texto de prueba");
+		
+		By boton = By.className("btn");
+		driver.findElement(boton).click();
+
+	}
+	
+	//Ir al formulario crear publicaciones, rellenarla con datos válidos y pulsar el botón Submit. Comprobar que la publicación sale en el listado de publicaciones de dicho usuario.
+		@Test
+		public void PR25() {
+			PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+			PO_LoginView.fillForm(driver,"koyomi@nishioishin.jp", "123456");
+			PO_View.checkElement(driver, "text", "Lista de Usuarios");
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id,'post-menu')]/a");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'post/add')]");
+			elementos.get(0).click();
+			WebElement title=driver.findElement(By.name("title"));
+			title.click();
+			title.clear();
+			WebElement text=driver.findElement(By.name("text"));
+			text.click();
+			text.clear();
+			text.sendKeys("");
+			text.sendKeys("Texto de prueba");
+			System.out.println("Prueba");
+			By boton = By.className("btn");
+			driver.findElement(boton).click();
+			PO_View.getP();
+			PO_View.checkKey(driver, "Error.post.title.empty",PO_Properties.getSPANISH());
+
+		}
+		
+		@Test
+		public void PR26() {
+			PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+			PO_LoginView.fillForm(driver,"koyomi@nishioishin.jp", "123456");
+			PO_View.checkElement(driver, "text", "Lista de Usuarios");
+			List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id,'post-menu')]/a");
+			elementos.get(0).click();
+			elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'post/list')]");
+			elementos.get(0).click();
+			elementos = SeleniumUtils.EsperaCargaPagina(driver, "free","//tbody/tr", PO_View.getTimeout());
+			assertTrue(elementos.size() == 1);
+
+		}
 
 }

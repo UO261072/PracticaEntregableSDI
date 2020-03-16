@@ -20,23 +20,25 @@ public class Post {
 	private User owner;
 	
 	private Date date;
-	
+	private String title;
 	private String text;
 	
 	public Post() {}
 
-	public Post(Long id, User owner, Date date, String text) {
+	public Post(Long id, User owner, Date date,String title, String text) {
 		super();
 		this.id = id;
 		this.owner = owner;
 		this.date = date;
+		this.title=title;
 		this.text = text;
 	}
 
-	public Post(User owner, Date date, String text) {
+	public Post(User owner, Date date,String title, String text) {
 		super();
 		this.owner = owner;
 		this.date = date;
+		this.title=title;
 		this.text = text;
 	}
 
@@ -71,6 +73,15 @@ public class Post {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	
 	
 }

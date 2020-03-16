@@ -25,7 +25,7 @@ public class SendInviteValidator implements Validator{
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return User.class.equals(clazz);
+		return Invite.class.equals(clazz);
 	}
 
 	@Override
