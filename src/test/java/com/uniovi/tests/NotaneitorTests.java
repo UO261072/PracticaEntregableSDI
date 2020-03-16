@@ -156,8 +156,19 @@ public class NotaneitorTests {
 	}
 
 	//Comprobarque el botón cerrar sesión no está visible si el usuario no está autenticado.
-	//@Test
+	@Test
 	public void PR10() {
+		try {
+			//Intentamos clickar en desconectar. Accion que debido a otras pruebas sabemos que funciona.
+			PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+			//Si lo conseguimos, el test a fracasado
+			assertTrue(false);
+		}
+		catch(Exception e) {
+			//Si no lo conseguimos el text es un exito
+			assertTrue(true);
+		}
+		
 	}
 
 	//Mostrar  el  listado  deusuarios  y  comprobar  que  se  muestran  todos  los  que  existen  en  el sistema.
@@ -239,7 +250,7 @@ public class NotaneitorTests {
 
 
 	}
-	//Desde el listado de usuarios de la aplicación, enviar una invitación de amistad a un usuario al que ya le habíamos enviado la invitación previamente. No debería dejarnos enviar la invitación, se podríaocultar el botón de enviar invitación o notificar que ya había sido enviada previamente.
+	//Desde el listado de usuarios de la aplicación, enviar una invitación de amistad a un usuario al que ya le habíamos enviado la invitación previamente. No debería dejarnos enviar la invitación, se podría ocultar el botón de enviar invitación o notificar que ya había sido enviada previamente.
 	//@Test
 	public void PR16() {
 
