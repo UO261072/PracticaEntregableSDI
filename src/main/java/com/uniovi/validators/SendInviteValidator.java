@@ -31,18 +31,17 @@ public class SendInviteValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		Invite invite=(Invite) target;
-		
 		User reciever=invite.getReciever();
 		User sender=invite.getSender();
 		List<Friends> friends=this.friendsService.getAllUserFriends(sender);
 		for(int i=0;i<friends.size();i++) {
 			if(friends.get(i).getUser1().equals(reciever)||friends.get(i).getUser2().equals(reciever))
-				errors.rejectValue("invite", "Error.friend");
+				errors.rejectValue("recieveString", "Error.friend");
 		}
-		List<Invite> invites=this.invitesService.getUserInvites(sender);
+		List<Invite> invites=this.invitesService.getInvites();
 		for(int i=0;i<invites.size();i++) {
-			if(invites.get(i).getReciever().equals(reciever)||invites.get(i).getSender().equals(reciever))
-				errors.rejectValue("invite", "Error.friend");
+			if(invites.get(i).getReciever().getEmail().contentEquals(reciever.getEmail())||invites.get(i).getSender().getEmail().contentEquals(reciever.getEmail()))
+				errors.rejectValue("recieveString", "Error.friend");
 		}
 		
 	}
@@ -55,9 +54,9 @@ public class SendInviteValidator implements Validator{
 			if(friends.get(i).getUser1().equals(reciever)||friends.get(i).getUser2().equals(reciever))
 				return false;
 		}
-		List<Invite> invites=this.invitesService.getUserInvites(sender);
+		List<Invite> invites=this.invitesService.getInvites();
 		for(int i=0;i<invites.size();i++) {
-			if(invites.get(i).getReciever().equals(reciever)||invites.get(i).getSender().equals(reciever))
+			if(invites.get(i).getReciever().getEmail().contentEquals(reciever.getEmail())||invites.get(i).getSender().getEmail().contentEquals(reciever.getEmail()))
 				return false;
 		}
 		return true;

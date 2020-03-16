@@ -48,7 +48,7 @@ public class InviteController {
 	private SendInviteValidator sendInviteValidator;
 	
 	@RequestMapping(value="/invite/send",method=RequestMethod.POST)
-	public String sendInvite(@ModelAttribute Invite invite,Principal principal) {
+	public String sendInvite(@Validated Invite invite,BindingResult result,Principal principal) {
 	
 		String email=principal.getName();
 		invite.setSender(this.usersService.getUserByEmail(email));
@@ -57,6 +57,9 @@ public class InviteController {
 		reciever=a[2];
 		User u=this.usersService.getUserByEmail(reciever);
 		invite.setReciever(u);
+		this.sendInviteValidator.validate(invite, result);
+		if(result.hasErrors())
+			return "/invite/send";
 		this.inviteService.addInvite(invite);
 		return "redirect:/invite/send";
 	}
@@ -73,7 +76,7 @@ public class InviteController {
 		Invite invite=new Invite(user1,user2);
 		
 		if(!this.sendInviteValidator.comprobar(invite))
-			return "/invite/send";
+			return "redirect:/user/list";
 		this.inviteService.addInvite(invite);
 		return "redirect:/user/list";
 	}

@@ -68,7 +68,6 @@ public class NotaneitorTests {
 	public void PR01() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		PO_RegisterView.fillForm(driver, "Nadeko", "Sengoku", "nadeko@nishioishin.jp", "123456","123456");
-		PO_View.checkElement(driver, "text", "Lista de Usuarios");
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
 
 	}
@@ -251,9 +250,23 @@ public class NotaneitorTests {
 
 	}
 	//Desde el listado de usuarios de la aplicación, enviar una invitación de amistad a un usuario al que ya le habíamos enviado la invitación previamente. No debería dejarnos enviar la invitación, se podría ocultar el botón de enviar invitación o notificar que ya había sido enviada previamente.
-	//@Test
+	@Test
 	public void PR16() {
-
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver,"nadeko@nishioishin.jp", "123456");
+		PO_View.checkElement(driver, "text", "Lista de Usuarios");
+		List<WebElement> elements=driver.findElements(By.name("invite"));
+		elements.get(1).click();
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver,"koyomi@nishioishin.jp", "123456");
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id,'invite-menu')]/a");
+		elementos.get(0).click();
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'invite/recieve')]");
+		elementos.get(0).click();
+		PO_View.checkElement(driver, "text", "Invitaciones Recividas");
+		elements=driver.findElements(By.name("reciever"));
+		assertTrue(elements.size() == 2);
 	}
 
 	//Mostrar el listado de invitaciones de amistad recibidas. Comprobar con un listado que contenga varias invitaciones recibidas

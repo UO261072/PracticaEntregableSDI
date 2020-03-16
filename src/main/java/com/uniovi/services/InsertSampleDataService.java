@@ -69,9 +69,11 @@ public class InsertSampleDataService {
 		user3=this.usersService.getUserByEmail(user3.getEmail());
 		Invite invite1=new Invite(user1,user2);
 		Invite invite2=new Invite(user3,user1);
+		Invite invite3=new Invite(user5,user1);
 
 		this.invitesService.addInvite(invite1);
 		this.invitesService.addInvite(invite2);
+		this.invitesService.addInvite(invite3);
 		
 		this.friendsService.addFriends(new Friends(user1,user6));
 
