@@ -42,6 +42,7 @@ public class InvitesService {
 		this.invitesRepository.deleteById(id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Invite getInvite(Long id) {
 		Set<Invite> consultedList=(Set<Invite>)httpSession.getAttribute("consultedList");
 		if(consultedList==null) {

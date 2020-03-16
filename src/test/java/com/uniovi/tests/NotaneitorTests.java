@@ -12,7 +12,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_LoginView;
 import com.uniovi.tests.pageobjects.PO_NavView;
-import com.uniovi.tests.pageobjects.PO_PrivateView;
 import com.uniovi.tests.pageobjects.PO_Properties;
 import com.uniovi.tests.pageobjects.PO_RegisterView;
 import com.uniovi.tests.pageobjects.PO_View;
@@ -341,19 +340,13 @@ public class NotaneitorTests {
 	//Intentar acceder sin estar autenticado a la opción de listado de usuarios. Se deberá volver al formulario de login.
 	@Test
 	public void PR21() {
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id,'user-menu')]/a");
-		elementos.get(0).click();
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/list')]");
-		elementos.get(0).click();
+		driver.get(driver.getCurrentUrl()+"user/list");
 		PO_View.checkKey(driver, "login.title", PO_Properties.getSPANISH());
 	}
 	//Intentar acceder sin estar autenticado a la opción de listado de publicaciones de un usuario estándar. Se deberá volver al formulario de login.
 	@Test
 	public void PR22() {
-		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id,'user-menu')]/a");
-		elementos.get(0).click();
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/list')]");
-		elementos.get(0).click();
+		driver.get(driver.getCurrentUrl()+"user/list");
 		PO_View.checkKey(driver, "login.title", PO_Properties.getSPANISH());
 	}
 	//Estando autenticado como usuario estándar intentar acceder a una opción disponible solo para usuarios administradores (Se puede añadir una opción cualquiera en el menú). Se deberá indicar un mensaje de acción prohibida.

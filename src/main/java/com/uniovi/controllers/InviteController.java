@@ -1,11 +1,11 @@
 package com.uniovi.controllers;
 
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
 
-import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
+
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,9 +28,7 @@ import com.uniovi.services.InvitesService;
 import com.uniovi.services.RolesService;
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.SendInviteValidator;
-import com.uniovi.validators.SignUpFormValidator;
 
-import net.bytebuddy.asm.Advice.This;
 
 @Controller
 public class InviteController {
@@ -44,8 +42,6 @@ public class InviteController {
 	@Autowired
 	private RolesService rolesService;
 	
-	@Autowired
-	private HttpSession httpSession;
 
 	@Autowired
 	private SendInviteValidator sendInviteValidator;

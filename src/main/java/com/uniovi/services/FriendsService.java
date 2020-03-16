@@ -44,6 +44,7 @@ public class FriendsService {
 		this.friendsRepository.deleteById(id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Friends getFriends(Long id) {
 		Set<Friends> consultedList=(Set<Friends>)httpSession.getAttribute("consultedList");
 		if(consultedList==null) {
