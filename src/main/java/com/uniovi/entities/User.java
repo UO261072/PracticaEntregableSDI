@@ -30,6 +30,9 @@ public class User {
 	@OneToMany(mappedBy="sender",cascade=CascadeType.ALL)
 	private Set<Invite> sendedInvites;
 	
+	@OneToMany(mappedBy="owner",cascade=CascadeType.ALL)
+	private Set<Post> posts;
+	
 
 	
 	public User() {}
@@ -117,6 +120,14 @@ public class User {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Set<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override

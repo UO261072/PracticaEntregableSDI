@@ -11,39 +11,43 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-			
+
 				<li><a href="/" th:text="#{nav.home}"></a></li>
-				
-				<li id="invite-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"
-					th:text="#{nav.invite}"><span
-						class="caret"></span>
-				</a>
+
+				<li sec:authorize="isAuthenticated()" id="invite-menu"
+					class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{nav.invite}"><span
+						class="caret"></span> </a>
 					<ul class="dropdown-menu">
-						<li><a
-							href="/invite/send" th:text="#{nav.invite.send}"></a></li>
+						<li><a href="/invite/send" th:text="#{nav.invite.send}"></a></li>
 						<li><a href="/invite/recieve" th:text="#{nav.invite.recieve}"></a></li>
 					</ul></li>
-					
-					<li id="user-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"
-					th:text="#{nav.user}"><span
-						class="caret"></span>
-					</a>
+
+				<li sec:authorize="isAuthenticated()" id="user-menu"
+					class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{nav.user}"><span
+						class="caret"></span> </a>
 					<ul class="dropdown-menu">
 						<li><a href="/user/list" th:text="#{nav.user.list}"></a></li>
 					</ul></li>
-					
-					<li id="friend-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"
-					th:text="#{nav.friends}"><span
-						class="caret"></span>
-					</a>
+
+				<li sec:authorize="isAuthenticated()" id="friend-menu"
+					class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{nav.friends}"><span
+						class="caret"></span> </a>
 					<ul class="dropdown-menu">
 						<li><a href="/friends/list" th:text="#{nav.friends.list}"></a></li>
 					</ul></li>
-					<li><a name="admin" href="/admin" th:text="#{nav.admin}"></a></li>
-					
+				<li sec:authorize="isAuthenticated()" id="post-menu"
+					class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" th:text="#{nav.post}"><span
+						class="caret"></span> </a>
+					<ul class="dropdown-menu">
+						<li><a href="/post/list" th:text="#{nav.post.list}"></a></li>
+					</ul></li>
+
+				<li><a name="admin" href="/admin" th:text="#{nav.admin}"></a></li>
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href=" #"

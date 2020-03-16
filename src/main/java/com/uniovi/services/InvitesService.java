@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.uniovi.entities.Invite;
 import com.uniovi.entities.User;
@@ -25,6 +27,10 @@ public class InvitesService {
 	public List<Invite> getInvites(){
 		List<Invite> invites=new ArrayList<Invite>();
 		this.invitesRepository.findAll().forEach(invites::add);
+		return invites;
+	}
+	public Page<Invite> getInvites(Pageable pageable){
+		Page<Invite> invites=invitesRepository.findAll(pageable);
 		return invites;
 	}
 	
@@ -50,6 +56,10 @@ public class InvitesService {
 	public List<Invite> getUserInvites(User user){
 		List<Invite> invites=new ArrayList<Invite>();
 		this.invitesRepository.findByReciever(user).forEach(invites::add);
+		return invites;
+	}
+	public Page<Invite> getUserInvites(Pageable pageable,User user){
+		Page<Invite> invites=this.invitesRepository.findByReciever(pageable,user);
 		return invites;
 	}
 }

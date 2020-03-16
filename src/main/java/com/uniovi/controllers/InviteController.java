@@ -2,11 +2,14 @@ package com.uniovi.controllers;
 
 import java.security.Principal;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,14 +84,17 @@ public class InviteController {
 		return "redirect:/user/list";
 	}
 	@RequestMapping("/invite/recieve")
-	public String recievedInvites(Model model,Principal principal){
+	public String recievedInvites(Model model,Pageable pageable,Principal principal){
+		Page<Invite> invites=new PageImpl<Invite>(new LinkedList<Invite>());
 		String email=principal.getName();
 		User u=this.usersService.getUserByEmail(email);
 		if(u.getRole().contentEquals(this.rolesService.getRoles()[1]))
-			model.addAttribute("inviteList", this.inviteService.getInvites());
+			invites=this.inviteService.getInvites(pageable);
 		else {
-			model.addAttribute("inviteList", this.inviteService.getUserInvites(u));
+			invites= this.inviteService.getUserInvites(pageable,u);
 		}
+		model.addAttribute("inviteList", invites.getContent());
+		model.addAttribute("page", invites);
 		return "/invite/recieve";
 	}
 	
