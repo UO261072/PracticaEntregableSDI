@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head" />
+<body>
+
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{invite.send.title}">Enviar Invitacion</h2>
+		<form class="form-horizontal" method="post" action="/invite/send"
+			th:object="${invite}">
+			
+
+			<div class="form-group">
+				<label th:text="#{invite.send.reciever}" class="control-label col-sm-2" for="recieveString">asd</label>
+				<div class="col-sm-10">
+					<select id="sender" class="form-control" name="recieveString">
+						<option th:each="user : ${userList}" th:value="${user}"
+							th:text="${user}"></option>
+					</select>
+				</div>
+			</div>
+			
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary"
+						th:text="#{invite.send.button}">Send</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+
+</html>

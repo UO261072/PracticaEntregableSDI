@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{signup.title}">Registráte como usuario</h2>
+		<form class="form-horizontal" method="post" action="/signup"
+			th:object="${user}">
+			<div class="form-group">
+				<label th:text="#{signup.name}" class="control-label col-sm-2" for="name">Nombre:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="name"
+						/> <span
+						class="text-danger" th:if="${#fields.hasErrors('name')}"
+						th:errors="*{name}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label th:text="#{signup.surname}" class="control-label col-sm-2" for="surname">Apellidos:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="surname"
+						 /> <span
+						class="text-danger" th:if="${#fields.hasErrors('surname')}"
+						th:errors="*{surname}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label th:text="#{signup.email}" class="control-label col-sm-2" for="email">Email:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="email"/>  
+						<span class="text-danger"
+						th:if="${#fields.hasErrors('email')}"
+						th:errors="*{email}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label th:text="#{signup.pass}" class="control-label col-sm-2" for="password">Password:</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="password"
+						 /> <span class="text-danger"
+						th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label th:text="#{signup.repeatPass}" class="control-label col-sm-2" for="passwordConfirm">Repita
+					el Password:</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="passwordConfirm"
+						/> <span class="text-danger"
+						th:if="${#fields.hasErrors('passwordConfirm')}"
+						th:errors="*{passwordConfirm}" />
+
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary" th:text="#{signup.button}">Enviar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

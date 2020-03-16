@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{invite.recieve.title}"></h2>
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="tableInvites"
+				id="tableInvites">
+				<thead>
+					<tr>
+						<th th:text="#{invite.recieve.id}">Id</th>
+						<th th:text="#{invite.recieve.from}"></th>
+						<th th:text="#{invite.recieve.to}"></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="invite : ${inviteList}">
+						<td th:text="${invite.id}"></td>
+						<td name="reciever" th:text="${invite.sender}"></td>
+						<td th:text="${invite.reciever}"></td>
+						<td><a th:href="${'/invite/delete/' + invite.id}"th:text="#{invite.recieve.remove}"></a></td>
+						<td><a name="add" th:href="${'/friend/add/' + invite.id}"th:text="#{invite.recieve.add}"></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>
